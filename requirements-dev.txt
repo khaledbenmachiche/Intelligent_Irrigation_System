@@ -1,0 +1,3 @@
+# Developer quality tools
+pyright==1.1.408
+ruff==0.15.7

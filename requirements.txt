@@ -1,0 +1,11 @@
+numpy==2.4.3
+pandas==3.0.1
+scikit-learn==1.8.0
+scipy==1.17.1
+matplotlib==3.10.8
+seaborn==0.13.2
+PyYAML==6.0.3
+joblib==1.5.3
+tensorflow-cpu==2.21.0
+fastapi==0.116.1
+uvicorn==0.35.0

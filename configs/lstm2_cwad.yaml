@@ -1,0 +1,24 @@
+experiment_name: lstm2_cwad
+task: cwad
+seed: 137
+dataset_path: data/cwad_season_features.csv
+model_output_dir: models
+artifact_dir: artifacts/lstm
+
+data:
+  date_column: date
+  target_column: CWAD
+  drop_columns: [HIAD.1]
+
+training:
+  n_out: 1
+  seq_len: 110
+  hidden_units: 128
+  dropout_size: 0.2
+  learning_rate: 0.001
+  decay: 0.00001
+  batch_size: 64
+  epochs: 120
+  validation_split: 0.2
+  test_size: 0.2
+  early_stopping_patience: 20

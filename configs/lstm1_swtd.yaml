@@ -1,0 +1,25 @@
+experiment_name: lstm1_swtd
+task: swtd
+seed: 137
+dataset_path: data/swtd_daily_features.csv
+model_output_dir: models
+artifact_dir: artifacts/lstm
+
+data:
+  date_column: date
+  test_years: [2022, 2023]
+  feature_columns: [T2M_MAX, T2M_MIN, WS2M, RH2M, ALLSKY_SFC_SW_DWN, ETo, IRRC]
+  target_column: SWTD
+  season_column: season
+
+training:
+  seq_len: 7
+  n_out: 1
+  batch_size: 128
+  epochs: 160
+  validation_split: 0.2
+  learning_rate: 0.0001
+  decay: 0.00001
+  hidden_units: 256
+  dropout_size: 0.3
+  early_stopping_patience: 20

@@ -1,0 +1,32 @@
+{
+    "include": [
+        "src",
+        "scripts"
+    ],
+    "exclude": [
+        "notebooks",
+        ".venv",
+        ".venv312",
+        "**/__pycache__"
+    ],
+    "venvPath": ".",
+    "venv": ".venv312",
+    "useLibraryCodeForTypes": true,
+    "typeCheckingMode": "standard",
+    "pythonVersion": "3.12",
+    "reportMissingTypeStubs": "none",
+    "reportMissingImports": "warning",
+    "reportMissingModuleSource": "none",
+    "reportAttributeAccessIssue": "none",
+    "reportCallIssue": "none",
+    "reportArgumentType": "none",
+    "reportReturnType": "none",
+    "reportUnusedImport": "warning",
+    "reportUnusedVariable": "warning",
+    "reportIncompatibleMethodOverride": "warning",
+    "reportIncompatibleVariableOverride": "warning",
+    "reportGeneralTypeIssues": "error",
+    "reportUndefinedVariable": "error",
+    "reportPrivateImportUsage": "warning",
+    "reportConstantRedefinition": "warning"
+}

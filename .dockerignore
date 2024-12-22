@@ -1,0 +1,39 @@
+# VCS
+.git
+.gitignore
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Local environments
+.venv/
+.venv312/
+venv/
+env/
+
+# Tooling caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.pyre/
+
+# Notebook noise
+.ipynb_checkpoints/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Runtime logs
+*.log
+logs/
+
+# Local/IDE files
+.vscode/
+.idea/
+
+# Large or runtime-generated project outputs
+artifacts/
+
