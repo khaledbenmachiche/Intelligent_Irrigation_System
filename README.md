@@ -5,7 +5,7 @@
 
 ##  Description
 
-Ce projet vise à développer un système d’irrigation intelligent, autonome et économe en eau, spécialement conçu pour les **zones désertiques** telles que la région d’El Oued en Algérie. Grâce à l'intégration de **modèles prédictifs LSTM** et d’un **agent d’apprentissage par renforcement profond (DQN)**, le système adapte en temps réel l’irrigation en fonction des besoins réels des cultures (ici, la tomate) et des conditions climatiques locales.
+Ce projet vise à développer un système d’irrigation intelligent, autonome et économe en eau, spécialement conçu pour les **zones désertiques**  par exemple la région d’El Oued en Algérie. Grâce à l'intégration de **modèles prédictifs LSTM** et d’un **agent d’apprentissage par renforcement profond (DQN)**, le système adapte en temps réel l’irrigation en fonction des besoins réels des cultures (ici, la tomate) et des conditions climatiques locales.
 
 ---
 
