@@ -109,6 +109,18 @@ uv run pyright src/ scripts/
 uv run ruff check src/ scripts/
 ```
 
+## Structure du dépôt
+
+```text
+.
+├── configs/                     # Configurations YAML des expériences LSTM
+├── data/                        # Jeux de données prétraités et sources météo
+├── notebooks/                   # Exploration et expérimentation initiales
+├── scripts/train_lstm.py        # Point d'entrée CLI pour l'entraînement
+├── scripts/api.py               # API FastAPI de prédiction
+└── src/irrigation_system/       # Modules réutilisables du pipeline
+```
+
 ## Lancer les expériences
 
 LSTM 1 (SWTD):
@@ -122,6 +134,19 @@ LSTM 2 (CWAD):
 ```bash
 .venv312/bin/python scripts/train_lstm.py --config configs/lstm2_cwad.yaml
 ```
+
+Sorties attendues après un run:
+
+- un modèle `.keras` dans `models/`
+- un fichier de métriques JSON dans `artifacts/lstm/metrics/`
+- un CSV de prédictions dans `artifacts/lstm/predictions/`
+- une entrée supplémentaire dans `artifacts/lstm/logs/experiment_runs.csv`
+
+## Reproductibilité
+
+- Les seeds Python, NumPy et TensorFlow sont fixées au démarrage via `set_all_seeds`.
+- Les expériences sont pilotées par des fichiers YAML pour conserver les hyperparamètres versionnés.
+- Les sorties sont horodatées automatiquement pour éviter d'écraser les runs précédents.
 
 ## Service API (deploy)
 
@@ -137,6 +162,19 @@ Health check:
 
 ```bash
 curl http://localhost:8000/health
+```
+
+Variables d'environnement utiles:
+
+- `MODEL_PATH`: chemin vers le modèle Keras servi par l'API
+- `MODEL_FEATURE_COUNT`: nombre de variables attendues par pas de temps; si défini, l'API rejette les requêtes incompatibles
+- `PYTHONPATH=src`: nécessaire si vous lancez l'API hors conteneur sans installation package
+
+Exemple avec validation explicite du nombre de features:
+
+```bash
+MODEL_PATH=models/latest.keras MODEL_FEATURE_COUNT=8 \
+.venv312/bin/uvicorn scripts.api:app --host 0.0.0.0 --port 8000
 ```
 
 Prediction example:
@@ -155,6 +193,25 @@ Container deployment:
 docker build -t irrigation-api .
 docker run --rm -p 8000:8000 -e MODEL_PATH=models/latest.keras irrigation-api
 ```
+
+Déploiement avec Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+Le service expose ensuite:
+
+- `GET /health` pour l'état du modèle chargé
+- `POST /predict` pour l'inférence à partir d'une séquence `[seq_len, n_features]`
+
+## Workflow recommandé
+
+1. Préparer l'environnement Python.
+2. Lancer un entraînement avec l'un des fichiers YAML de `configs/`.
+3. Vérifier les métriques et le CSV de prédictions générés dans `artifacts/lstm/`.
+4. Copier ou renommer le modèle retenu vers `models/latest.keras`.
+5. Démarrer l'API localement ou via Docker.
 
 ## Artifacts générés
 
